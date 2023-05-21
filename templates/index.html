@@ -7,53 +7,52 @@
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 
-<h3>Chat with an AI simulated customer!</h3>
-</head>  <img src="{{ url_for('static', filename='Calzedonia-logo.png') }}" class="icon" />
+    <img src="{{ url_for('static', filename='Calzedonia-logo.png') }}" class="icon" />
+  <style>
+    .chat-container {
+        width: 400px;
+        margin: 0 auto;
+    }
 
-<head>
-    <style>
-        .chat-container {
-            width: 400px;
-            margin: 0 auto;
-        }
+    .staff-message {
+        background-color: white;
+        color: black;
+        border-radius: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+        border: 2px solid #D9BAAD;
+    }
 
-        .staff-message {
-            background-color: white;
-            color: black;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 10px;
-            text-align: right;
-            border: 2px solid #D9BAAD;
-        }
-
-        .bot-message {
-            background-color: #D9BAAD;
-            color: black;
-            border-radius: 15px;
-            padding: 10px;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-    </style>
+    .bot-message {
+        background-color: #D9BAAD;
+        color: black;
+        border-radius: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+</style>
+  <h1>Chat with an AI simulated customer!</h1>
+</head>
 
 <body>
     <div class="chat-container">
-        <div class="staff-message">
-            Hello! This is a staff message.
-        </div>
-        <div class="bot-message">
-            Hi! This is a message from the bot.
-        </div>
+      {% for message in result %}
+        {% if message['role'] == 'Staff' %}
+          <div class="message staff-message">
+            {{ message['content'] }}
+          </div>
+        {% else %}
+          <div class="message bot-message">
+            {{ message['content'] }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <form action="/" method="post">
+        <input type="text" name="input" placeholder="Your say" required>
+        <input type="submit" value="SUBMIT">
+      </form>
     </div>
 </body>
-<body>
-    {% if result %}
-        <div>Customer says:</div>
-        <div class="result">{{ result }}</div>
-    {% endif %}
-    <form action="/" method="post">
-      <input type="text" name="input" placeholder="Your say" required />
-      <input type="submit" value="SUBMIT" />
-    </form>
-  </body>

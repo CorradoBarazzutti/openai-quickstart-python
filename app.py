@@ -40,7 +40,6 @@ class Prompt:
         conv1.add_message(role="Customer", content="I'll buy it, then.")
         conv1.add_message(role="Staff", content="Very good! here is your recipe. Have a nice day")
         self.examples.append(conv1)
-        print(conv1.history)
 
         conv2 = Convo()
         conv2.add_message(role="Customer", content="Hello!")
@@ -87,10 +86,10 @@ def index():
             model="text-davinci-003",
             prompt=str(prompt) + "Customer: ",
             temperature=0,
-            stop=["Staff: ", "Customer: "]
+            stop=["Staff:", "Customer:"]
         )
         return redirect(url_for("index", result=response.choices[0].text))
 
     result = request.args.get("result")
     prompt.add_message_to_last(role="Customer", content=result)
-    return render_template("index.html", result=result)
+    return render_template("index.html", result=prompt.return_last().history)
