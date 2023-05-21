@@ -1,21 +1,59 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>ChatBot for Calzedonia cashiers</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
+    href="{{ url_for('static', filename='Calzedonia-logo.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
-</head>
+
+<h3>Chat with an AI simulated customer!</h3>
+</head>  <img src="{{ url_for('static', filename='Calzedonia-logo.png') }}" class="icon" />
+
+<head>
+    <style>
+        .chat-container {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .staff-message {
+            background-color: white;
+            color: black;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: right;
+            border: 2px solid #D9BAAD;
+        }
+
+        .bot-message {
+            background-color: #D9BAAD;
+            color: black;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    </style>
 
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+    <div class="chat-container">
+        <div class="staff-message">
+            Hello! This is a staff message.
+        </div>
+        <div class="bot-message">
+            Hi! This is a message from the bot.
+        </div>
+    </div>
 </body>
+<body>
+    {% if result %}
+        <div>Customer says:</div>
+        <div class="result">{{ result }}</div>
+    {% endif %}
+    <form action="/" method="post">
+      <input type="text" name="input" placeholder="Your say" required />
+      <input type="submit" value="SUBMIT" />
+    </form>
+  </body>
