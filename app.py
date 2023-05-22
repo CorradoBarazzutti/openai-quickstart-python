@@ -85,7 +85,7 @@ def index():
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=str(prompt) + "Customer: ",
-            temperature=0,
+            temperature=0.5,
             stop=["Staff:", "Customer:"]
         )
         return redirect(url_for("index", result=response.choices[0].text))
